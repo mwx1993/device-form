@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>نموذج بيانات الأجهزة</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    form {
+      background: white;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #555;
+    }
+    input[type="text"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 15px;
+      box-sizing: border-box;
+    }
+    textarea {
+      resize: vertical;
+    }
+    button {
+      margin-top: 20px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 17px;
+      border: none;
+      padding: 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .note {
+      font-size: 13px;
+      color: #888;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>نموذج تسجيل بيانات الأجهزة</h2>
+
+  <form id="deviceForm">
+
+    <label for="deviceName">اسم الجهاز *</label>
+    <input type="text" id="deviceName" name="deviceName" required placeholder="مثال: الكمبيوتر المكتبي 01" />
+
+    <label for="deviceType">نوع الجهاز *</label>
+    <select id="deviceType" name="deviceType" required>
+      <option value="">اختر نوع الجهاز</option>
+      <option value="كمبيوتر">كمبيوتر</option>
+      <option value="لابتوب">لابتوب</option>
+      <option value="طابعة">طابعة</option>
+      <option value="راوتر">راوتر</option>
+      <option value="جهاز شبكة">جهاز شبكة</option>
+      <option value="هاتف">هاتف</option>
+      <option value="جهاز آخر">جهاز آخر</option>
+    </select>
+
+    <label for="deviceIP">عنوان IP</label>
+    <input type="text" id="deviceIP" name="deviceIP" placeholder="مثال: 192.168.1.10" />
+
+    <label for="os">نظام التشغيل</label>
+    <input type="text" id="os" name="os" placeholder="مثال: Windows 10" />
+
+    <label for="model">الموديل</label>
+    <input type="text" id="model" name="model" placeholder="مثال: Dell OptiPlex 7070" />
+
+    <label for="owner">المالك/المستخدم</label>
+    <input type="text" id="owner" name="owner" placeholder="اسم المستخدم أو القسم" />
+
+    <label for="location">موقع الجهاز</label>
+    <input type="text" id="location" name="location" placeholder="المكتب، الطابق، القسم..." />
+
+    <label for="notes">ملاحظات إضافية</label>
+    <textarea id="notes" name="notes" rows="3" placeholder="أي ملاحظات أخرى"></textarea>
+
+    <button type="submit">إرسال البيانات</button>
+    <p class="note">* الحقول المشار إليها ضرورية</p>
+
+  </form>
+
+  <script>
+    document.getElementById('deviceForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const data = {
+        deviceName: document.getElementById('deviceName').value,
+        deviceType: document.getElementById('deviceType').value,
+        deviceIP: document.getElementById('deviceIP').value,
+        os: document.getElementById('os').value,
+        model: document.getElementById('model').value,
+        owner: document.getElementById('owner').value,
+        location: document.getElementById('location').value,
+        notes: document.getElementById('notes').value
+      };
+
+      fetch('https://script.google.com/macros/s/AKfycbzXurHwwZvUtAS4nrex0_52th6Uo3yNHyYQWI1p6PdWk-MrSObbUiGPBfDEQULRh38iIg/exec', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.text())
+      .then(responseText => {
+        alert(responseText);
+        document.getElementById('deviceForm').reset();
+      })
+      .catch(error => {
+        alert('حدث خطأ أثناء الإرسال: ' + error.message);
+      });
+    });
+  </script>
+
+</body>
+</html>
