@@ -67,7 +67,7 @@
 
   <h2>نموذج تسجيل بيانات الأجهزة</h2>
 
-  <form id="deviceForm">
+  <form id="deviceForm" method="post" action="https://script.google.com/macros/s/AKfycbxiJoHovxPo6W8Ml_MHBQxyw-YfXd06Hy9NiUH-tJmM3nOPDGQFmwChhmIcUvrfG7rq4Q/exec" target="_blank" onsubmit="return confirm('هل أنت متأكد من إرسال البيانات؟');">
 
     <label for="deviceName">اسم الجهاز *</label>
     <input type="text" id="deviceName" name="deviceName" required placeholder="مثال: الكمبيوتر المكتبي 01" />
@@ -106,39 +106,6 @@
     <p class="note">* الحقول المشار إليها ضرورية</p>
 
   </form>
-
-  <script>
-    document.getElementById('deviceForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const data = {
-        deviceName: document.getElementById('deviceName').value,
-        deviceType: document.getElementById('deviceType').value,
-        deviceIP: document.getElementById('deviceIP').value,
-        os: document.getElementById('os').value,
-        model: document.getElementById('model').value,
-        owner: document.getElementById('owner').value,
-        location: document.getElementById('location').value,
-        notes: document.getElementById('notes').value
-      };
-
-      fetch('https://script.google.com/macros/s/AKfycbxiJoHovxPo6W8Ml_MHBQxyw-YfXd06Hy9NiUH-tJmM3nOPDGQFmwChhmIcUvrfG7rq4Q/exec', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
-      .then(response => response.text())
-      .then(text => {
-        alert(text);
-        this.reset();
-      })
-      .catch(error => {
-        alert('حدث خطأ أثناء الإرسال: ' + error.message);
-      });
-    });
-  </script>
 
 </body>
 </html>
