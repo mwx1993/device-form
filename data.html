@@ -67,8 +67,10 @@
 
   <h2>نموذج تسجيل بيانات الأجهزة</h2>
 
-  <form id="deviceForm" method="post" action="https://script.google.com/macros/s/AKfycbxiJoHovxPo6W8Ml_MHBQxyw-YfXd06Hy9NiUH-tJmM3nOPDGQFmwChhmIcUvrfG7rq4Q/exec" target="_blank" onsubmit="return confirm('هل أنت متأكد من إرسال البيانات؟');">
+  <!-- iframe مخفي لاستقبال رد الخادم -->
+  <iframe name="hidden_iframe" style="display:none;"></iframe>
 
+  <form id="deviceForm" method="post" action="https://script.google.com/macros/s/AKfycbxurHwwZvUtAS4nrex0_52th6Uo3yNHyYQWI1p6PdWk-MrSObbUiGPBfDEQULRh38iIg/exec" target="hidden_iframe" onsubmit="submitted=true;">
     <label for="deviceName">اسم الجهاز *</label>
     <input type="text" id="deviceName" name="deviceName" required placeholder="مثال: الكمبيوتر المكتبي 01" />
 
@@ -104,8 +106,19 @@
 
     <button type="submit">إرسال البيانات</button>
     <p class="note">* الحقول المشار إليها ضرورية</p>
-
   </form>
+
+  <script>
+    // تأكيد إرسال البيانات بنجاح (اختياري)
+    let submitted = false;
+    window.addEventListener('message', function(event) {
+      if (submitted && event.origin === "https://script.google.com") {
+        alert("تم حفظ البيانات بنجاح.");
+        document.getElementById('deviceForm').reset();
+        submitted = false;
+      }
+    });
+  </script>
 
 </body>
 </html>
