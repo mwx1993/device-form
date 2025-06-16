@@ -2,77 +2,15 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>نموذج بيانات الأجهزة</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f7fa;
-      padding: 20px;
-    }
-    h2 {
-      text-align: center;
-      color: #333;
-    }
-    form {
-      background: white;
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 25px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: bold;
-      color: #555;
-    }
-    input[type="text"],
-    select,
-    textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 15px;
-      box-sizing: border-box;
-    }
-    textarea {
-      resize: vertical;
-    }
-    button {
-      margin-top: 20px;
-      background-color: #4CAF50;
-      color: white;
-      font-size: 17px;
-      border: none;
-      padding: 12px;
-      border-radius: 5px;
-      cursor: pointer;
-      width: 100%;
-    }
-    button:hover {
-      background-color: #45a049;
-    }
-    .note {
-      font-size: 13px;
-      color: #888;
-      margin-top: 5px;
-    }
-  </style>
 </head>
 <body>
 
   <h2>نموذج تسجيل بيانات الأجهزة</h2>
 
-  <!-- iframe مخفي لاستقبال رد الخادم -->
-  <iframe name="hidden_iframe" style="display:none;"></iframe>
-
-  <form id="deviceForm" method="post" action="https://script.google.com/macros/s/AKfycbxurHwwZvUtAS4nrex0_52th6Uo3yNHyYQWI1p6PdWk-MrSObbUiGPBfDEQULRh38iIg/exec" target="hidden_iframe" onsubmit="submitted=true;">
+  <form method="post" action="https://script.google.com/macros/s/AKfycbxiJoHovxPo6W8Ml_MHBQxyw-YfXd06Hy9NiUH-tJmM3nOPDGQFmwChhmIcUvrfG7rq4Q/exec">
     <label for="deviceName">اسم الجهاز *</label>
-    <input type="text" id="deviceName" name="deviceName" required placeholder="مثال: الكمبيوتر المكتبي 01" />
+    <input type="text" id="deviceName" name="deviceName" required /><br/>
 
     <label for="deviceType">نوع الجهاز *</label>
     <select id="deviceType" name="deviceType" required>
@@ -84,41 +22,28 @@
       <option value="جهاز شبكة">جهاز شبكة</option>
       <option value="هاتف">هاتف</option>
       <option value="جهاز آخر">جهاز آخر</option>
-    </select>
+    </select><br/>
 
     <label for="deviceIP">عنوان IP</label>
-    <input type="text" id="deviceIP" name="deviceIP" placeholder="مثال: 192.168.1.10" />
+    <input type="text" id="deviceIP" name="deviceIP" /><br/>
 
     <label for="os">نظام التشغيل</label>
-    <input type="text" id="os" name="os" placeholder="مثال: Windows 10" />
+    <input type="text" id="os" name="os" /><br/>
 
     <label for="model">الموديل</label>
-    <input type="text" id="model" name="model" placeholder="مثال: Dell OptiPlex 7070" />
+    <input type="text" id="model" name="model" /><br/>
 
     <label for="owner">المالك/المستخدم</label>
-    <input type="text" id="owner" name="owner" placeholder="اسم المستخدم أو القسم" />
+    <input type="text" id="owner" name="owner" /><br/>
 
     <label for="location">موقع الجهاز</label>
-    <input type="text" id="location" name="location" placeholder="المكتب، الطابق، القسم..." />
+    <input type="text" id="location" name="location" /><br/>
 
     <label for="notes">ملاحظات إضافية</label>
-    <textarea id="notes" name="notes" rows="3" placeholder="أي ملاحظات أخرى"></textarea>
+    <textarea id="notes" name="notes"></textarea><br/>
 
     <button type="submit">إرسال البيانات</button>
-    <p class="note">* الحقول المشار إليها ضرورية</p>
   </form>
-
-  <script>
-    // تأكيد إرسال البيانات بنجاح (اختياري)
-    let submitted = false;
-    window.addEventListener('message', function(event) {
-      if (submitted && event.origin === "https://script.google.com") {
-        alert("تم حفظ البيانات بنجاح.");
-        document.getElementById('deviceForm').reset();
-        submitted = false;
-      }
-    });
-  </script>
 
 </body>
 </html>
